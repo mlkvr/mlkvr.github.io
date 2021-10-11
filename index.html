@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <title>Portfolio Website</title>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div class="navbar">
+            <h2 style="text-align: center;">Malik Utku Vur</h2>
+        </div>
+
+        <video id="bigvid" width="1920" height="600" autoplay muted loop style="width: 100%; height: auto; max-width: 1920; max-height: 600;">
+            <source src="movie.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <video id="smallvid" width="600" height="337" autoplay muted loop style="width: 100%; height: auto; max-width: 600; max-height: 337;">
+            <source src="movie2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    <style>
+        @media only screen and (max-width: 600px) {
+            #bigvid{
+                display: none;
+            }
+            #smallvid{
+                visibility:visible;
+            }
+        }
+        @media only screen and (min-width: 601px) {
+            #bigvid{
+                visibility: visible;
+            }
+            #smallvid{
+                display: none;
+            }
+        }
+}
+    </style>
+    </body>
+</html>
