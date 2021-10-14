@@ -5,14 +5,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-       
-            <h2>Under Development</h2>
-    
+
+		<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 550 550"><defs><style>.cls-1,.cls-2{fill:none;stroke:#f7931e;stroke-width:3px;}.cls-1{stroke-linecap:round;stroke-linejoin:bevel;}.cls-2{stroke-miterlimit:10;}.cls-3{fill:#fbb03b;}.cls-4{font-size:35px;fill:#fff;font-family:BerlinSansFB-Reg, Berlin Sans FB;}</style></defs><g id="vinch"><path class="cls-1" d="M135.78,161H383.61l15.54,20-263.37-2.06Zm0,0,18.56,18.08L167.61,161l13.25,18.29,14-18.29L207,179.49l28,.22L247.57,161l13.26,18.92L274.47,161,287,180.12,300.24,161l14,19.33,14-19.33,14,19.55L356,161l12.5,20.24L383.61,161M169,172.21v-4.42a6.79,6.79,0,0,0-6.79-6.79H142.79a6.79,6.79,0,0,0-6.79,6.79v4.42a6.79,6.79,0,0,0,6.79,6.79h19.42A6.79,6.79,0,0,0,169,172.21ZM353.29,247V181.21" transform="translate(-134.28 -127)"/></g><g id="vincs"><path class="cls-2" d="M211.19,354h21.22S241,365.73,241,368H200.45S205.39,354.74,211.19,354Zm-12.51,15.5H242.5c0-5-9-14-9-14v-196l-8.29-31H216.5l-6,30.35V355.5C202.5,356.5,198.68,369.5,198.68,369.5Zm12.32-32,20.5-19-19.36-20L231.5,279,211,259.53,231.5,240,211,219.11l20.5-19.71L211,181.21m20.69,0-20.5,18.19,20.5,19.71L211.19,240l20.5,19.53L211.19,279l19.36,19.52-19.36,20,20.5,19M235,161H210v20h25Zm-22-15h16.84" transform="translate(-134.28 -127)"/></g><g id="yazı"><rect class="cls-3" x="183.72" y="120" width="71" height="39"/><text class="cls-4" transform="translate(188.6 151.34)">WIP</text></g></svg>
     <style>
-       h2{
-           text-align: center; 
-           margin-top:50%;
-        }
+		svg{
+			padding-left:10rem;
+			padding-top:3rem;
+		}
+		
+		#vinch{
+			animation-name:ilerigeri;
+			animation-duration: 4s;
+			animation-iteration-count: infinite
+			
+		}
+		#yazı{
+			animation:ilerigeriyazı 4s ease infinite;
+			
+		}
+		
+		@keyframes ilerigeri{
+			0% {transform:translateX(0%);}
+			50% {transform:translateX(5%);}
+			100%{transform:translateX(0%);}
+		}
+		@keyframes ilerigeriyazı{
+			0% {transform:translateX(0%);
+				transform:rotate(-2deg)
+				}
+			50% {transform:translateX(5%);
+				transform:rotate(0deg)}
+			100% {transform:translateX(0%);
+				transform:rotate(-2deg)}
+		}
     </style>
     </body>
 </html>
