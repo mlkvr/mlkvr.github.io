@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<head>
+    <title>Day 4</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/js/bootstrap.min.js" integrity="sha512-UR25UO94eTnCVwjbXozyeVd6ZqpaAE9naiEUBK/A+QDbfSTQFhPGj5lOR6d8tsgbBk84Ggb5A3EkjsOgPRPcKA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<style>
+.container{
+  padding: 20px;
+}
+.linelesscol {
+  flex: 1 0 0%;
+  padding: 50px;
+}
+
+.col {
+    border: solid black;
+    border-width: 0px 5px 0px 0px;
+    flex: 1 0 0%;
+    padding: 50px;
+
+  }
+
+.mid {
+  border: solid black;
+    border-width: 0px 0px 5px 0px;
+}
+
+.row {
+    --bs-gutter-x: 1.5rem;
+    text-align: center;
+    /*border: solid 2px black;*/
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(-1 * var(--bs-gutter-y));
+    margin-right: calc(-.5 * var(--bs-gutter-x));
+    margin-left: calc(-.5 * var(--bs-gutter-x));
+  }
+</style>
+    <div class="container">
+        <div class="row mid">
+            <div data-cell-index="0" class="col cell">
+                <svg height="100" width="100"><line x1="0" y1="0" x2="100" y2="100" style="stroke:rgb(0,0,0);stroke-width:3;display:none;" /><line x1="0" y1="100" x2="100" y2="0" style="stroke:rgb(0, 0, 0);stroke-width:3;display:none;"/></svg>
+            </div>
+            <div data-cell-index="1" class="col cell">
+                
+            </div>
+            <div data-cell-index="2" class="linelesscol cell">
+                
+            </div>
+        </div>
+        <div class="row mid">
+            <div data-cell-index="3" class="col cell">
+                <svg height="100" width="100"><line x1="0" y1="0" x2="100" y2="100" style="stroke:rgb(0,0,0);stroke-width:3;display:none;" /><line x1="0" y1="100" x2="100" y2="0" style="stroke:rgb(0, 0, 0);stroke-width:3;display:none;"/></svg>
+            </div>
+            <div data-cell-index="4" class="col cell">
+                
+            </div>
+            <div data-cell-index="5" class="linelesscol cell">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div data-cell-index="6" class="col cell">
+                <svg height="100" width="100"><line x1="0" y1="0" x2="100" y2="100" style="stroke:rgb(0,0,0);stroke-width:3;display:none;" /><line x1="0" y1="100" x2="100" y2="0" style="stroke:rgb(0, 0, 0);stroke-width:3;display:none;"/></svg> 
+            </div>
+            <div data-cell-index="7" class="col cell">
+                
+            </div>
+            <div  data-cell-index="8" class="linelesscol cell">
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="linelesscol"></div>
+            <div class="linelesscol">
+                <h2 class="game--status"></h2>
+                 <button class="game--restart">Restart Game</button>
+            </div>
+            <div class="linelesscol"></div>
+        </div>
+    </div>
+    <script>const statusDisplay = document.querySelector('.game--status');
+
+let gameActive = true;
+let currentPlayer = "X";
+let gameState = ["", "", "", "", "", "", "", "", ""];
+
+const winningMessage = () => `Player ${currentPlayer} has won!`;
+const drawMessage = () => `Game ended in a draw!`;
+const currentPlayerTurn = () => `It's ${currentPlayer}'s turn`;
+
+statusDisplay.innerHTML = currentPlayerTurn();
+
+const winningConditions = [
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6]
+];
+let xsign = '<svg height="100" width="100"><line x1="0" y1="0" x2="100" y2="100" style="stroke:rgb(0,0,0);stroke-width:3" /><line x1="0" y1="100" x2="100" y2="0" style="stroke:rgb(0, 0, 0);stroke-width:3"/><animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="2s" repeatCount="1" /></svg>'
+let osign = '<svg height="100" width="100"><circle cx="50" cy="50" r="49" stroke="black" stroke-width="3" fill="white" /><animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="2s" repeatCount="1" /></svg>'
+function handleCellPlayed(clickedCell, clickedCellIndex) {
+    gameState[clickedCellIndex] = currentPlayer;
+    if(currentPlayer === "X"){
+    clickedCell.innerHTML = xsign;}
+    else{
+    clickedCell.innerHTML = osign;}
+}
+
+function handlePlayerChange() {
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerHTML = currentPlayerTurn();
+}
+
+function handleResultValidation() {
+    let roundWon = false;
+    for (let i = 0; i <= 7; i++) {
+        const winCondition = winningConditions[i];
+        let a = gameState[winCondition[0]];
+        let b = gameState[winCondition[1]];
+        let c = gameState[winCondition[2]];
+        if (a === '' || b === '' || c === '') {
+            continue;
+        }
+        if (a === b && b === c) {
+            roundWon = true;
+            break
+        }
+    }
+
+    if (roundWon) {
+        statusDisplay.innerHTML = winningMessage();
+        gameActive = false;
+        return;
+    }
+
+    let roundDraw = !gameState.includes("");
+    if (roundDraw) {
+        statusDisplay.innerHTML = drawMessage();
+        gameActive = false;
+        return;
+    }
+
+    handlePlayerChange();
+}
+
+function handleCellClick(clickedCellEvent) {
+    const clickedCell = clickedCellEvent.target;
+    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-cell-index'));
+
+    if (gameState[clickedCellIndex] !== "" || !gameActive) {
+        return;
+    }
+
+    handleCellPlayed(clickedCell, clickedCellIndex);
+    handleResultValidation();
+}
+
+function handleRestartGame() {
+    gameActive = true;
+    currentPlayer = "X";
+    gameState = ["", "", "", "", "", "", "", "", ""];
+    statusDisplay.innerHTML = currentPlayerTurn();
+    document.querySelectorAll('.cell').forEach(cell => cell.innerHTML = "");
+}
+
+document.querySelectorAll('.cell').forEach(cell => cell.addEventListener('click', handleCellClick));
+document.querySelector('.game--restart').addEventListener('click', handleRestartGame);</script>
+</body>
+</html>
