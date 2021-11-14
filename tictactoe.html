@@ -107,7 +107,7 @@ const winningConditions = [
     [2, 4, 6]
 ];
 let xsign = '<svg height="100" width="100"><line x1="0" y1="0" x2="100" y2="100" style="stroke:rgb(0,0,0);stroke-width:3" /><line x1="0" y1="100" x2="100" y2="0" style="stroke:rgb(0, 0, 0);stroke-width:3"/><animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="2s" repeatCount="1" /></svg>'
-let osign = '<svg height="100" width="100"><circle cx="50" cy="50" r="49" stroke="black" stroke-width="3" fill="white" /><animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="2s" repeatCount="1" /></svg>'
+let osign = '<svg height="100" width="100"><circle cx="50" cy="50" r="49" stroke="black" stroke-width="3" /><animate attributeType="CSS" attributeName="opacity" from="0" to="1" dur="2s" repeatCount="1" /></svg>'
 function handleCellPlayed(clickedCell, clickedCellIndex) {
     gameState[clickedCellIndex] = currentPlayer;
     if(currentPlayer === "X"){
