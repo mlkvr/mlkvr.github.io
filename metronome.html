@@ -36,7 +36,7 @@
         var changeSpeed = tickspeed;
         repeater = setInterval(repeaterFn, tickspeed);
         bpmeter.addEventListener("change", changeBPM);
-        const tick = new Audio('/Audio/metronom.wav');
+        const tick = new Audio('metronom.wav');
         function changeBPM(){
             a = bpmeter.value / 60;
             changeSpeed = bpmeter.value;
