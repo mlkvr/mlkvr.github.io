@@ -1,0 +1,56 @@
+h1, .h1 {
+  font-size: 60px;
+  color: white;
+}
+
+.clean-navbar .logo {
+  font-size: 2rem;
+}
+
+.clean-navbar.fixed-top, .clean-navbar.fixed-bottom {
+  box-shadow: 0px 0px 5px rgba(0,0,0,0.5);
+}
+
+@media (min-width: 576px) {
+  .navbar {
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+  }
+}
+
+@media (min-width: 576px) {
+  .clean-navbar.fixed-top + .page {
+    padding-top: 3rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .clean-block.clean-hero {
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: initial;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+  }
+}
+
+@media (min-width: 576px) {
+  .clean-block.clean-hero {
+    position: relative;
+    text-align: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 0;
+  }
+}
+
+img, svg {
+  /*vertical-align: middle;*/
+}
+
