@@ -1,0 +1,396 @@
+<html>
+    <head>
+        <title>Day14</title>
+        <script src="https://cdn.jsdelivr.net/npm/animejs@3.0.1/lib/anime.min.js"></script>
+    </head>
+    <body>
+        <style>
+            body{
+                background-color: white;
+            }
+            
+            div{
+              position: absolute;
+            }
+
+            
+            p{
+              position:relative;
+              top: -100px;
+              text-align: center;
+              
+            }
+            
+            .floor-two{
+    top:-100px;
+}
+.cake {
+    position: absolute;
+    width: 250px;
+    height: 200px;
+    top: 50%;
+    left: 50%;
+    margin-top: -70px;
+    margin-left: -125px;
+}
+.plate {
+    width: 270px;
+    height: 110px;
+    position: absolute;
+    bottom: -10px;
+    left: -10px;
+    background-color: #ccc;
+    border-radius: 50%;
+    box-shadow: 0 2px 0 #b3b3b3, 0 4px 0 #b3b3b3, 0 5px 40px rgba(0, 0, 0, 0.5);
+}
+.cake > * {
+    position: absolute;
+}
+.layer {
+    position: absolute;
+    display: block;
+    width: 250px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #281c09;
+    box-shadow: 0 0px 0px #281c09, 0 30px 0px #281c09;
+}
+.layer-top {
+    top: 0px;
+}
+.layer-middle {
+    top: 33px;
+}
+.layer-bottom {
+    top: 66px;
+}
+
+.second-layer-top {
+    top: 33px;
+    width: 200px;
+    left:25px;
+    z-index: 1;
+}
+.second-layer-bottom {
+    top: 66px;
+    width: 200px;
+    left:25px;
+    z-index: 1;
+}
+.icing-first {
+    
+    background-color: #bcbe2e;
+    width: 250px;
+    height: 115px;
+    border-radius: 50%;
+}
+
+.icing-first:before {
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 9px;
+    left: 5px;
+    background-color: #bcbe2e;
+    box-shadow: 0 0 4px #bcbe2e;
+    border-radius: 50%;
+    z-index: 0;
+}
+.icing {
+    top: -67px;
+    left: 22px;
+    background-color: #bcbe2e;
+    width: 204px;
+    height: 100px;
+    border-radius: 50%;
+
+}
+
+.icing:before {
+    content: "";
+    position: absolute;
+    top: 1px;
+    right: 1px;
+    bottom: 2px;
+    left: 3px;
+    background-color: #bcbe2e;
+    box-shadow: 0 0 4px #969738, 0 0 4px #e0d0b4, 0 0 4px #f6efe3;
+    border-radius: 50%;
+    z-index: 2;
+}
+.drip {
+    display: block;
+    width: 50px;
+    height: 40px;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: #bcbe2e;
+}
+.drip1 {
+    top: 10px;
+    left: 63px;
+    transform: skewY(15deg);
+    height: 38px;
+    width: 40px;
+    z-index: 2;
+}
+.drip2 {
+    top: 15px;
+    left: 100px;
+    z-index: 2;
+}
+.drip3 {
+    top: 5px;
+    left: 145px;
+    width: 50px;
+    transform: skewY(-15deg);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    z-index: 2;
+}
+.drip4 {
+    top: -5px;
+    left: 40px;
+    width: 30px;
+    transform: skewY(25deg);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    z-index: 2;
+}
+.drip5 {
+    top: -5px;
+    left: 165px;
+    width: 50px;
+    transform: skewY(-15deg);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    z-index: 2;
+}
+.drip6 {
+    top: -15px;
+    left: 30px;
+    width: 20px;
+    transform: skewY(35deg);
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
+    z-index: 2;
+}
+.candle {
+    background-color: #7b020b;
+    width: 16px;
+    height: 50px;
+    border-radius: 8px / 4px;
+    top: -50px;
+    left: 50%;
+    margin-left: -8px;
+    z-index: 10;
+}
+.candle2 {
+    background-color: #7b020b;
+    width: 16px;
+    height: 50px;
+    border-radius: 8px / 4px;
+    top: -70px;
+    left: 30%;
+    margin-left: -8px;
+    z-index: 10;
+}
+.candle3 {
+    background-color: #7b020b;
+    width: 16px;
+    height: 50px;
+    border-radius: 8px / 4px;
+    top: -70px;
+    left: 70%;
+    margin-left: -8px;
+    z-index: 10;
+}
+.candle:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 16px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: #ad030f;
+}
+.flame {
+    position: absolute;
+    background-color: orange;
+    width: 15px;
+    height: 35px;
+    border-radius: 10px 10px 10px 10px / 25px 25px 10px 10px;
+    top: -34px;
+    left: 50%;
+    margin-left: -7.5px;
+    z-index: 10;
+    box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+    transform-origin: 50% 90%;
+    animation: flicker 1s ease-in-out alternate infinite;
+}
+@keyframes flicker {
+    0% {
+        transform: skewX(5deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.2), 0 0 20px rgba(255, 165, 0, 0.2), 0 0 60px rgba(255, 165, 0, 0.2), 0 0 80px rgba(255, 165, 0, 0.2);
+   }
+    25% {
+        transform: skewX(-5deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+   }
+    50% {
+        transform: skewX(10deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.3), 0 0 20px rgba(255, 165, 0, 0.3), 0 0 60px rgba(255, 165, 0, 0.3), 0 0 80px rgba(255, 165, 0, 0.3);
+   }
+    75% {
+        transform: skewX(-10deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.4), 0 0 20px rgba(255, 165, 0, 0.4), 0 0 60px rgba(255, 165, 0, 0.4), 0 0 80px rgba(255, 165, 0, 0.4);
+   }
+    100% {
+        transform: skewX(5deg);
+        box-shadow: 0 0 10px rgba(255, 165, 0, 0.5), 0 0 20px rgba(255, 165, 0, 0.5), 0 0 60px rgba(255, 165, 0, 0.5), 0 0 80px rgba(255, 165, 0, 0.5);
+   }
+}
+
+a{
+  text-align: center;
+  font-size: 48px;
+  position: relative;
+  left: 200px;
+  top: -70px;
+  color: blue;
+}
+        </style>
+
+    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 128 64" style="enable-background:new 0 0 128 64;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;}
+	.st2{stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'VladimirScript';}
+	.st4{font-size:20px;}
+	.st5{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+</style>
+<g id="katman_2">
+	<path class="st5" d="M33.76,46.14c0,0-4.22,0.64-5.52,1.77s-4.35,3.73-1.75,4.64s15.86-13.74,15.86-13.74s-3.28-0.88-5.56,2.27
+		c-2.27,3.16-0.13,5.56,1.01,5.56c1.14,0,4.55,0.25,4.55,0.25l6.24-7.75L38.33,51.66c0,0,3.27-3.05,7.55-3.71s11.37-6.36,11.37-6.36
+		L63,37.85l-10.16,14.3l2.83-5.04l-4.63-0.5l-6.8,5.08l7.21-4.29l7.33,0.25c0,0,2.48,0.81,1.81,4.32L71.4,38.81
+		c0,0-4.72,0.84-6.19,1.77l7.06-2.09c0,0,5.87,1.04,2.8,3.86c-3.07,2.82-6.44,3.46-7.83,3.79c-1.39,0.33-3.92-0.3-3.92-0.3
+		s5.99,0.89,8.68-0.67s4.21-3.83,6.35-4.59c2.15-0.76,4.84-2.41,6.53-2.09s6.48,2.6,0.8,5.88s-9.75,1.46-9.75,1.46
+		s2.55,0.75,3.19-0.61s5.13-5.72,5.13-5.72L73.8,51.19l4.8-4.29c0,0,11.87-4.93,13.14-6.06c1.26-1.14,4.34-1.95,4.34-1.95
+		s0.33,1.7-1.56,3.47s-7.78,5.9-7.07,7.58c0.7,1.68,2.37,2.8,6.06-0.51c3.7-3.31,10.3-9.36,10.3-9.36L87.31,57.69
+		c0,0-1.25,2.98,2.91,1.46s6.95-3.28,8.59-3.03"/>
+</g>
+</svg>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="-60px"
+	 viewBox="0 50 128 128" style="enable-background:new 0 0 128 128;" xml:space="preserve">
+<style type="text/css">
+	.st0{display:none;}
+	.st1{display:inline;}
+	.st2{stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'VladimirScript';}
+	.st4{font-size:20px;}
+	.st5{display:inline;fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#000000;stroke-width:2;stroke-miterlimit:10;}
+</style>
+
+<g id="katman_3">
+	<path class="st6" d="M14.47,76.83l11.58-14.05c0,0,5.69,0.07,5.12,2.19s-2.17,2.89-5.16,3.27c-2.99,0.38-6.66,0.85-6.66,0.85
+		s9.93-0.45,8.51,2.64s-7.61,5.99-9.88,3.84s6.32-12.13,6.32-12.13s-3.89,1.22-5.36,1.94s5.86-2.6,5.86-2.6S10.13,77.11,19,76.15
+		s7.01,1.82,12.21-1.59c5.2-3.41,10.58-8.84,10.58-8.84s7.94-5.93,6.51-3.86S37.67,76.83,37.67,76.83l5.19-6.31L29.8,71.77
+		l13.18,0.01c0,0,8.93-1.59,4.97,0.03s-7.97,5.02-1.42,4.71s9.49-3.24,9.35-5.63s-5.45-0.88-5.83-1.76s-4.03-2.17,0.67-4.06
+		s9.25-3.37,9.94-2.37c0.69,1-0.93,3.76-4,3.84s0.88-0.87,0.88-0.87s1.92,1.79,4.93,0.37s5.42-2.29,5.42-2.29s-9.81,8.46-8.77,11.98
+		s9.82-5.84,9.82-5.84l6.71-7.08c0,0-11.21,10.94-9.25,12.69s4.36,0.48,6.89-1.67c2.53-2.15,10.55-10.92,10.55-10.92
+		s7.27,1.32,3.1,5.62c-4.17,4.29-8.21,9.5-10.36,7.66s0.76-5.13,0.76-5.13s7.58-8.21,3.03-6.32c-4.55,1.89-3.79,0.51-3.79,0.51
+		l8.64-0.76c0,0,7.15-1.64,0.71,6.32c-6.44,7.96,9.23,5.61,10.42,2.36c0,0-5.24,4.71-7.9,2.18c-2.65-2.53,0.06-3.63,2.3-4.78
+		s7.2-2.72,8.57-2.38s-10,0.28-7.22-1.96c2.78-2.24,8.72-4.39,9.73-3c1.01,1.39,0.18,2.59-3.38,2.62s5.66-0.72,10.2-2.87
+		c4.55-2.15-7.07,9.85-7.07,9.85s-2.85,5.08,1.26,2.53s14.54-10.83,14.54-10.83s-12.65,17.28-18.33,18.54
+		c-5.68,1.26-43.58,1.52-45.22,1.77s-21.47,0-21.47,0"/>
+</g>
+</svg>
+
+<div class="cake">
+  <div class="plate"></div>
+  <div class="floor-one">
+      <div class="layer layer-bottom"></div>
+      <div class="layer layer-middle"></div>
+      <div class="layer layer-top"></div>
+      <div class="icing-first"></div>
+  </div>
+  <div class="floor-two">
+      <div class="layer second-layer-bottom"></div>
+      <div class="layer second-layer-top"></div>
+      </div>
+      <div class="icing"></div>
+  <div class="drip drip1"></div>
+  <div class="drip drip2"></div>
+  <div class="drip drip3"></div>
+  <div class="drip drip4"></div>
+  <div class="drip drip5"></div>
+  <div class="drip drip6"></div>
+  <div class="candle">
+      <div class="flame"></div>
+  </div>
+  <div class="candle2">
+      <div class="flame"></div>
+  </div>
+  <div class="candle3">
+      <div class="flame"></div>
+  </div>
+</div>
+
+<p><b>Doğum günün kutlu olsun Merveğğ!</b><br> Önceki yılların aksine bu yıl daha işine yarıyabilecek bir hediye olsun istedim, bu yüzden yakın zamanda dinlemeyi bitirdiğim <i>Ustalık Gerektiren Kafaya Takmama Sanatı</i> kitabının
+  iyi bir seçim olabileceğini düşündüm. İlk defa duyuyorsan kişisel gelişim kitabı mı? işim olmaz diyebilirsin ama bu çok farklı tam <i>Loki</i> sana hem ilaç hem en güzel hediye oldu derken sonrasında yaşananları görünce bu kitabın doğru seçim olduğuna daha da emin oldum.
+  <br><br> Aşağıdaki linkten istersen normal okumak için pdf'ini istersende çalışırken dinleyebileceğin sesli kitap halini indirebilirsin</p>
+
+  <a>Tekrardan iyi ki doğdun!</a>
+        <script>
+  var tl = anime.timeline({
+  easing: 'easeOutExpo',
+  duration: 750
+});
+
+
+tl
+.add({
+  targets: '.st5',
+  strokeDashoffset: [anime.setDashoffset, 0],
+  easing: 'easeInOutSine',
+  duration: 1500,
+  delay: function(el, i) { return i * 250 },
+  direction: 'forward',
+  
+});
+tl
+.add({
+  targets: '.st6',
+  strokeDashoffset: [anime.setDashoffset, 0],
+  easing: 'easeInOutSine',
+  duration: 1500,
+  delay: function(el, i) { return i * 250 },
+  direction: 'forward',
+  
+});
+tl
+.add({
+  targets: 'p',
+  opacity:[0,1],
+  duration:1000,
+  direction: 'forward',
+  
+});
+tl
+.add({
+  targets: 'a',
+  opacity:[0,1],
+  duration:3000,
+  direction: 'forward',
+  
+});
+        </script>
+    </body>
+</html>
+
+
