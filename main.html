@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>This will be the main page</title>
+    </head>
+    <body>
+        <div class="commandLine">
+            <pre>                                     
+          _____________________________________________________________
+          
+          ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
+          ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      
+          ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   
+          ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██      
+           ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ 
+          _____________________________________________________________
+          
+          
+                                             
+            </pre>
+            <div class="row">
+              <span>></span><input placeholder="/" type="text" id="inp"></text><span class="blinky" id="blinky">_</span>
+            </div>
+            </div>
+          
+    </body>
+
+    <style>
+        body{
+  background:black;
+}
+span{
+  color:white;
+}
+
+pre{
+  color:white;
+}
+
+.commandLine{
+  width:250px;
+}
+
+input {
+  background:black;
+  border: none;
+  border-color: transparent;
+  color:white;
+  width:10px;
+}
+
+.blinky {
+  display:none;
+}
+
+
+    </style>
+
+    <script>
+        document.body.onload = function(){
+  myMove();
+}
+
+$('#inp').keydown(function (e) { 
+  if(e.keyCode!=8){
+ $(this).css( "width", "+=5" );}
+  else{
+    $(this).css( "width", "-=5" );
+  }
+});
+
+function myMove() {
+  let id = null;
+  let counter=0;
+  id = setInterval(frame, 500);
+  function frame() {
+    counter++;
+    //if(counter==50){
+        //clearInterval(id);
+    //}
+    if(document.getElementById("blinky").style.display=="none")
+    document.getElementById("blinky").style.display = "inline";
+    else{
+     document.getElementById("blinky").style.display = "none";
+    }
+  }
+}
+    </script>
+</html>
