@@ -2,35 +2,55 @@
 <html>
     <head>
         <title>This will be the main page</title>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
     </head>
     <body>
-        <div class="commandLine">
-            <pre>                                     
-          _____________________________________________________________
-          
-          ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
-          ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      
-          ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   
-          ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██      
-           ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ 
-          _____________________________________________________________
-          
-          
-                                             
-            </pre>
-            <div class="row">
-              <span>></span><input placeholder="/" type="text" id="inp"></text><span class="blinky" id="blinky">_</span>
-            </div>
-            </div>
-          
+      <div class="placehold"></div>
+      <div class="commandLine">
+        <pre>                                     
+      _____________________________________________________________
+      
+      ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
+      ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      
+      ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   
+      ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██      
+       ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ 
+      _____________________________________________________________
+      
+        </pre>
+        <div class="row">
+          <textarea id="querryResult">            I am Malik Utku Vur, a fresh computer engineer who
+            obsessed with games either creating or playing... 
+            
+            write help to view all the usable commands</textarea>
+        </div>
+        <div class="row">
+          <span>></span><input placeholder="/" type="text" id="inp"></text><span class="blinky" id="blinky">_</span>
+        </div>
+      
+        </div>
+      <div class="placehold"></div>
     </body>
 
     <style>
-        body{
+body{
   background:black;
+  display:grid;
+  grid-template-columns: auto auto auto;
 }
 span{
   color:white;
+}
+
+textarea{
+  display:inside;
+  color:white;
+  background:black;
+  width: 200%;
+  height: 100px;
+  resize: none;
+  border: none;
+  outline: none;
 }
 
 pre{
@@ -38,7 +58,8 @@ pre{
 }
 
 .commandLine{
-  width:250px;
+  width:300px;
+  left:50%;
 }
 
 input {
@@ -52,22 +73,39 @@ input {
 .blinky {
   display:none;
 }
-
-
     </style>
 
     <script>
-        document.body.onload = function(){
+document.body.onload = function(){
   myMove();
 }
 
 $('#inp').keydown(function (e) { 
-  if(e.keyCode!=8){
- $(this).css( "width", "+=5" );}
-  else{
-    $(this).css( "width", "-=5" );
+  if(e.keyCode!=8&&e.keyCode!=37&&e.keyCode!=38&&e.keyCode!=39&&e.keyCode!=40&&e.keyCode!=27){
+ $(this).css( "width", "+=6" );}
+  else if(e.keyCode==8){
+    $(this).css( "width", "-=6" );
+  }
+  if(e.keyCode==13){
+    let command = $(this).val();
+    commandParser(command);
+    $(this).val("");
+    $(this).css( "width", "6px" );
   }
 });
+
+function commandParser(cmmd){
+  console.log(cmmd);
+  switch(cmmd) {
+    case "help":$("#querryResult").css('display','block');
+    $("#querryResult").text("games - View all my games\ncv - Download cv"); break;
+    case "cv": $("#querryResult").css('display','block');
+    $("#querryResult").text("downloading cv.."); break;
+    case "games": $("#querryResult").css('display','block');
+    $("#inp").val("games/");
+    $("#querryResult").text("games will be here"); break;
+  }
+}
 
 function myMove() {
   let id = null;
