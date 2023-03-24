@@ -7,7 +7,8 @@
     <body>
       <div class="placehold"></div>
       <div class="commandLine">
-        <pre>                                     
+
+        <pre class="header">                                     
       _____________________________________________________________
       
       ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
@@ -18,10 +19,11 @@
       _____________________________________________________________
       
         </pre>
+
         <div class="row">
           <textarea id="querryResult">            I am Malik Utku Vur, a fresh computer engineer who
             obsessed with games either creating or playing... 
-            
+
             write help to view all the usable commands</textarea>
         </div>
         <div class="row">
@@ -80,6 +82,20 @@ document.body.onload = function(){
   myMove();
 }
 
+function printCV(){
+  let txt ="                             
+      _____________________________________________________________
+      
+      ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
+      ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      
+      ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   
+      ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██      
+       ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ 
+      _____________________________________________________________
+    ";
+  
+}
+
 $('#inp').keydown(function (e) { 
   if(e.keyCode!=8&&e.keyCode!=37&&e.keyCode!=38&&e.keyCode!=39&&e.keyCode!=40&&e.keyCode!=27){
  $(this).css( "width", "+=6" );}
@@ -100,6 +116,7 @@ function commandParser(cmmd){
     case "help":$("#querryResult").css('display','block');
     $("#querryResult").text("games - View all my games\ncv - Download cv"); break;
     case "cv": $("#querryResult").css('display','block');
+    $("#header").text(printCV());
     $("#querryResult").text("downloading cv.."); break;
     case "games": $("#querryResult").css('display','block');
     $("#inp").val("games/");

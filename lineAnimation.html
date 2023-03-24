@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Anime.js Example</title>
+	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			background-color: #000;
+			color: #fff;
+			font-size: 16px;
+			font-family: monospace;
+		}
+
+		.line {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 1px;
+			height: 0;
+			background-color: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="line"></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+	<script>
+		const line = document.querySelector('.line');
+		const timeline = anime.timeline({
+			easing: 'easeOutQuad',
+			duration: 1000
+		});
+
+		timeline.add({
+			targets: line,
+			height: 100,
+			duration: 2000,
+			complete: function(anim) {
+				line.style.transformOrigin = 'left center';
+				//line.style.transform = 'rotate(45deg)';
+			}
+		}).add({
+			targets: line,
+			left: '+=300',
+			duration: 1000
+		})
+        .add({
+			targets: line,
+			left: '-=300',
+			duration: 500
+		});
+	</script>
+</body>
+</html>

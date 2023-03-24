@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Bubble Sort Visualization</title>
+	<style>
+        body {
+			margin: 0;
+			padding: 0;
+			background-color: #000;
+			color: #fff;
+			font-size: 16px;
+			font-family: monospace;
+		}
+
+		.container {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+		}
+
+		.bar {
+			display: inline-block;
+			height: 30px;
+			width: 10px;
+			margin-right: 5px;
+			background-color: #fff;
+		}
+        .red {
+			background-color: red;
+		}
+	</style>
+</head>
+<body>
+	<div id="container"></div>
+
+	<script>
+		const container = document.getElementById('container');
+        window.onload = function() {
+            myFunction();
+};
+
+        function delay(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+async function myFunction() {
+		// generate an array of random numbers
+		const arr = [];
+		for (let i = 0; i < 50; i++) {
+			arr.push(Math.floor(Math.random() * 100));
+		}
+
+		// visualize the initial state of the array
+		render(arr);
+
+		// bubble sort algorithm
+		for (let i = 0; i < arr.length - 1; i++) {
+			for (let j = 0; j < arr.length - i - 1; j++) {
+				if (arr[j] > arr[j+1]) {
+					// swap the two elements
+					const temp = arr[j];
+					arr[j] = arr[j+1];
+					arr[j+1] = temp;
+					// visualize the swap
+                    await delay(10);
+					render(arr,j);
+				}
+			}
+		}
+    }
+		function render(arr,j) {
+			// clear the container
+			container.innerHTML = '';
+
+			// create a bar for each element in the array
+			arr.forEach((val,index) => {
+				const bar = document.createElement('div');
+                bar.className = 'bar';
+				if(j != null){
+                if(index==j){
+                    bar.className = 'bar red';
+                }}
+				bar.style.height = `${val}px`;
+				container.appendChild(bar);
+			});
+		}
+	</script>
+</body>
+</html>
