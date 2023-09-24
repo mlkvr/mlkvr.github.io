@@ -1,144 +1,222 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>This will be the main page</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    </head>
-    <body>
-      <div class="placehold"></div>
-      <div class="commandLine">
+<head>
+    <title>This will be the main page</title>
+    
+</head>
+<body>
+    <div class="placehold"></div>
+    <div class="commandLine" id="command-line">
 
-        <pre class="header">                                     
-      _____________________________________________________________
-      
-      ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
-      ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      
-      ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   
-      ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██      
-       ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ 
-      _____________________________________________________________
-      
-        </pre>
+        <pre class="header" id="welcomeText"></pre>
+        <pre class="header" id="helpText" style="display:none">
+    _____________________________________________________________
+    
+                ██     ██ ███████ ██      ███████
+                ██     ██ ██      ██      ██     ██
+                █████████ █████   ██      ████████   
+                ██     ██ ██      ██      ██
+                ██     ██ ███████ ███████ ██
+    _____________________________________________________________
 
-        <div class="row">
-          <textarea id="querryResult">            I am Malik Utku Vur, a fresh computer engineer who
-            obsessed with games either creating or playing... 
+      </pre>
 
-            write help to view all the usable commands</textarea>
+        <div class="row" id="text-container">
+            <!--<textarea id="querryResult">            I am Malik Utku Vur, a fresh computer engineer who
+        obsessed with games either creating or playing...
+
+        write help to view all the usable commands</textarea>-->
         </div>
-        <div class="row">
-          <span>></span><input placeholder="/" type="text" id="inp"></text><span class="blinky" id="blinky">_</span>
+        <div class="row" id="commandInput">
+            <span>></span><input placeholder="/" type="text" id="inp"><span class="blinky" id="blinky">_</span>
         </div>
-      
-        </div>
-      <div class="placehold"></div>
-    </body>
+
+    </div>
+    <div class="placehold"></div>
+
 
     <style>
-body{
-  background:black;
-  display:grid;
-  grid-template-columns: auto auto auto;
-}
-span{
-  color:white;
-}
+        body {
+            background: black;
+            display: grid;
+            grid-template-columns: auto auto auto;
+        }
 
-textarea{
-  display:inside;
-  color:white;
-  background:black;
-  width: 200%;
-  height: 100px;
-  resize: none;
-  border: none;
-  outline: none;
-}
+        span {
+            color: white;
+        }
 
-pre{
-  color:white;
-}
+        textarea {
+            display: inside;
+            color: white;
+            background: black;
+            width: 200%;
+            height: 100px;
+            resize: none;
+            border: none;
+            outline: none;
+        }
 
-.commandLine{
-  width:300px;
-  left:50%;
-}
+        pre {
+            color: white;
+        }
 
-input {
-  background:black;
-  border: none;
-  border-color: transparent;
-  color:white;
-  width:10px;
-}
+        .commandLine {
+            width: 480px;
+            left: 50%;
+        }
 
-.blinky {
-  display:none;
-}
+        input {
+            background: black;
+            border: none;
+            border-color: transparent;
+            color: white;
+            width: 10px;
+        }
+
+        .blinky {
+            display: none;
+        }
     </style>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src="anime.min.js"></script>
     <script>
-document.body.onload = function(){
-  myMove();
-}
+        document.body.onload = function () {
+            initAnimation();
+        }
 
-function printCV(){
-  let txt ="                             
-      _____________________________________________________________
-      
-      ██     ██ ███████ ██       ██████  ██████  ███    ███ ███████ 
-      ██     ██ ██      ██      ██      ██    ██ ████  ████ ██      
-      ██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████   
-      ██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██      
-       ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████ 
-      _____________________________________________________________
-    ";
-  
-}
+        function printCV() {
+            //let txt = "'"
+            //_____________________________________________________________
 
-$('#inp').keydown(function (e) { 
-  if(e.keyCode!=8&&e.keyCode!=37&&e.keyCode!=38&&e.keyCode!=39&&e.keyCode!=40&&e.keyCode!=27){
- $(this).css( "width", "+=6" );}
-  else if(e.keyCode==8){
-    $(this).css( "width", "-=6" );
-  }
-  if(e.keyCode==13){
-    let command = $(this).val();
-    commandParser(command);
-    $(this).val("");
-    $(this).css( "width", "6px" );
-  }
-});
+            //██     ██ ███████ ██       ██████  ██████  ███    ███ ███████
+            //██     ██ ██      ██      ██      ██    ██ ████  ████ ██
+            //██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████
+            //██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██
+            //███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████
+            //_____________________________________________________________
+            //"'";
 
-function commandParser(cmmd){
-  console.log(cmmd);
-  switch(cmmd) {
-    case "help":$("#querryResult").css('display','block');
-    $("#querryResult").text("games - View all my games\ncv - Download cv"); break;
-    case "cv": $("#querryResult").css('display','block');
-    $("#header").text(printCV());
-    $("#querryResult").text("downloading cv.."); break;
-    case "games": $("#querryResult").css('display','block');
-    $("#inp").val("games/");
-    $("#querryResult").text("games will be here"); break;
-  }
-}
+        }
 
-function myMove() {
-  let id = null;
-  let counter=0;
-  id = setInterval(frame, 500);
-  function frame() {
-    counter++;
-    //if(counter==50){
-        //clearInterval(id);
-    //}
-    if(document.getElementById("blinky").style.display=="none")
-    document.getElementById("blinky").style.display = "inline";
-    else{
-     document.getElementById("blinky").style.display = "none";
-    }
-  }
-}
+        $('#inp').keydown(function (e) {
+            if (e.keyCode != 8 && e.keyCode != 37 && e.keyCode != 38 && e.keyCode != 39 && e.keyCode != 40 && e.keyCode != 27) {
+                $(this).css("width", "+=6");
+            }
+            else if (e.keyCode == 8) {
+                $(this).css("width", "-=6");
+            }
+            if (e.keyCode == 13) {
+                let command = $(this).val();
+                commandParser(command);
+            }
+        });
+
+        function commandParser(cmmd) {
+            debugger;
+            let commandLine = document.getElementById('command-line');
+            console.log(cmmd);
+            switch (cmmd) {
+                case "help":
+                    $("#welcomeText").hide();
+                    $("#helpText").show();
+
+                    writeText("cv - see my cv\n games - see games I made");
+                    
+                    break;
+                case "cv": $("#queryResult").css('display', 'block');
+                    $("#header").text(printCV());
+                    $("#queryResult").text("downloading cv.."); break;
+                case "games": $("#queryResult").css('display', 'block');
+                    $("#inp").val("games/");
+                    $("#queryResult").text("games will be here"); break;
+            }
+        }
+
+        function initAnimation() {
+            let id = null;
+            let firstRow = null;
+            let counter = 0;
+            let txt = "";
+            id = setInterval(frame, 500);
+            firstRow = setInterval(firstRowAnimation, 25);
+            function firstRowAnimation() {
+                counter++;
+                if (counter < 63) {
+                    txt += "_";
+                    $("#welcomeText").text(txt);
+                } else if (counter == 64 || counter == 65 || counter == 67 || counter == 69 || counter == 71 || counter == 73 || counter == 75) {
+                    txt += "\n";
+                    $("#welcomeText").text(txt);
+                } else if (counter == 66) {
+                    txt += "██     ██ ███████ ██       ██████  ██████  ███    ███ ███████";
+                    $("#welcomeText").text(txt);
+                } else if (counter == 68) {
+                    txt += "██     ██ ██      ██      ██      ██    ██ ████  ████ ██";
+                    $("#welcomeText").text(txt);
+                } else if (counter == 70) {
+                    txt += "██  █  ██ █████   ██      ██      ██    ██ ██ ████ ██ █████";
+                    $("#welcomeText").text(txt);
+                } else if (counter == 72) {
+                    txt += "██ ███ ██ ██      ██      ██      ██    ██ ██  ██  ██ ██";
+                    $("#welcomeText").text(txt);
+                } else if (counter == 74) {
+                    txt += " ███ ███  ███████ ███████  ██████  ██████  ██      ██ ███████";
+                    $("#welcomeText").text(txt);
+                } else if (counter > 75 && counter < 139) {
+                    txt += "_";
+                    $("#welcomeText").text(txt);
+                } else if (counter > 139) {
+                    clearInterval(firstRow);
+                    writeText("I am Malik Utku Vur, a fresh computer engineer & this is my website. Please write help to view all the usable commands.");
+                }
+
+            }
+        }
+
+        let introText = "";
+        let textArray = null;
+        let textContainer = document.getElementById('text-container');
+
+        function writeText(txt) {
+            while (textContainer.firstChild) {
+                textContainer.removeChild(textContainer.firstChild);
+            }
+
+            introText = txt;
+            textArray = introText.split('');
+            animateText(0);
+        }
+        
+        function animateText(index) {
+            debugger;
+            if (index < textArray.length) {
+
+                const charElement = document.createElement('span');
+                charElement.textContent = textArray[index];
+
+                textContainer.appendChild(charElement);
+                anime({
+                    targets: charElement,
+                    opacity: 1,
+                    duration: 50,
+                    easing: 'easeOutExpo',
+                    complete: () => {
+                        animateText(index + 1);
+                    }
+                });
+
+            }
+        }
+        
+            function frame() {
+                if (document.getElementById("blinky").style.display == "none")
+                    document.getElementById("blinky").style.display = "inline";
+                else {
+                    document.getElementById("blinky").style.display = "none";
+                }
+            }
+        
     </script>
+</body>
 </html>
